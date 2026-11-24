@@ -16,7 +16,6 @@ actualiza solo. De momento hay un plugin:
 /plugin install orchestrated-dev@jjballano-skills
 ```
 
-Mientras el repo sea privado hace falta acceso de lectura (`gh auth login` y `gh auth setup-git`).
 Para que se actualice solo: `/plugin` → *Marketplaces* → `jjballano-skills` → *Enable auto-update*.
 
 Las skills se invocan solas por su descripción o a mano: `/orchestrated-dev:task-workflow`,
