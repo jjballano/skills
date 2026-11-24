@@ -34,6 +34,9 @@ do not ask for approval of the plan each time.
 
 - If there are several open questions, list them all at a glance, then ask **one per turn**.
   Skip any the user already answered along the way.
+- "Let's go point by point" means: for each point, present all its items at once, each with
+  your proposal, and let the user say what to do with them — not item by item, and not
+  executing the point without asking.
 - A question from the user about a solution already decided is for understanding it, not for
   reopening it: answer short and clear, without proposing alternatives.
 - If the user asks for something you already do by default (because it is in this skill or in

@@ -1,6 +1,6 @@
 {
   "name": "orchestrated-dev",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Working method for tasks handed to Claude: orchestrate small subagents, verify only what changed, open the PR and shepherd it until it is mergeable, and report status piece by piece.",
   "author": {
     "name": "jjballano"
