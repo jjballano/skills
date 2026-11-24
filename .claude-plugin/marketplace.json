@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "jjballano-skills",
+  "owner": {
+    "name": "jjballano"
+  },
+  "metadata": {
+    "description": "Personal Claude skills: the way I hand work to Claude and how it should run it."
+  },
+  "plugins": [
+    {
+      "name": "workflow",
+      "source": "./plugins/workflow",
+      "description": "Working method for tasks handed to Claude: orchestrate small subagents, verify only what changed, open the PR and shepherd it until it is mergeable, and report status piece by piece."
+    }
+  ]
+}
