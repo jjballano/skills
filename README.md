@@ -1,53 +1,57 @@
 # skills
 
-Mis skills de Claude: cómo le paso el trabajo y cómo quiero que lo lleve.
+My Claude skills: how I hand work to Claude and how I want it to run that work.
 
-El repo es un *marketplace* de plugins de Claude Code, así que se instala con un comando y se
-actualiza solo. De momento hay un plugin:
+The repo is a Claude Code plugin *marketplace*, so it installs with one command and can update
+itself. For now it holds one plugin:
 
-| Plugin                         | Skills                                                                                                                          |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| [`orchestrated-dev`](plugins/orchestrated-dev) | `task-workflow` (la operativa al recibir una tarea), `pr-shepherd` (vigilar la PR hasta que se pueda mergear), `status-report` (el «minuto y resultado») |
+| Plugin                                         | Skills                                                                                                                         |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [`orchestrated-dev`](plugins/orchestrated-dev) | `task-workflow` (how a task is run once handed over), `pr-shepherd` (watch the PR until it can be merged), `status-report` (piece-by-piece status update) |
 
-## Instalar
+## Install
 
 ```
 /plugin marketplace add jjballano/skills
 /plugin install orchestrated-dev@jjballano-skills
 ```
 
-Para que se actualice solo: `/plugin` → *Marketplaces* → `jjballano-skills` → *Enable auto-update*.
+To keep it up to date: `/plugin` → *Marketplaces* → `jjballano-skills` → *Enable auto-update*.
 
-Las skills se invocan solas por su descripción o a mano: `/orchestrated-dev:task-workflow`,
+Skills trigger on their own from their description, or by hand: `/orchestrated-dev:task-workflow`,
 `/orchestrated-dev:pr-shepherd`, `/orchestrated-dev:status-report`.
 
-## Qué hace cada una
+## What each skill does
 
-- **task-workflow**: el hilo principal orquesta y queda libre; el trabajo se trocea en
-  subagentes en segundo plano con el modelo más pequeño que lo haga bien; sus dudas van al
-  orquestador, no a mí; el orquestador valida cada resultado; se verifica solo lo tocado; diff
-  mínimo; cada PR sale con su vigilante.
-- **pr-shepherd**: un agente pequeño corre un monitor que solo emite eventos (comentario o review
-  nuevos, check en rojo, conflicto, cambio de base, READY, mergeada), lo rearma cuando caduca,
-  arregla lo que haga falta y limpia el worktree al mergear. Incluye `scripts/watch-prs.sh` y la
-  receta de PRs apiladas y rebases en cascada.
-- **status-report**: estado pieza a pieza refrescado en vivo, lo siguiente, y siempre «lo que
-  necesito de ti».
+- **task-workflow**: the main thread orchestrates and stays free; the work is split into
+  background subagents on the smallest model that does each piece well; their questions go to
+  the orchestrator, not to the user; the orchestrator validates every result; only what changed
+  is verified; minimal diffs; every PR ships with its watcher.
+- **pr-shepherd**: a small-model agent runs a monitor that only emits events (new comment or
+  review, failed check, conflict, base change, READY, merged), re-arms it when it expires, gets
+  whatever is needed fixed, and cleans up the worktree after the merge. Ships
+  `scripts/watch-prs.sh` and the recipe for stacked PRs and cascade rebases.
+- **status-report**: piece-by-piece status refreshed live, what comes next, and always a
+  "what I need from you" section.
 
-## Añadir o cambiar una skill
+## Adding or changing a skill
 
-1. La skill va en `plugins/<plugin>/skills/<skill>/SKILL.md`, en **inglés**, con sus ficheros de
-   apoyo dentro de su carpeta (`references/`, `scripts/`, `assets/`). Nada de rutas de mi
-   máquina ni de otros repos: tiene que ser autocontenida.
-2. Sube la `version` de `plugins/<plugin>/.claude-plugin/plugin.json` en cada cambio; si no,
-   el auto-update no lo recoge.
-3. Comprueba en local:
+1. A skill lives in `plugins/<plugin>/skills/<skill>/SKILL.md`, in English, with its supporting
+   files inside its own folder (`references/`, `scripts/`, `assets/`). No paths to a specific
+   machine or to other repos: it must be self-contained.
+2. Bump the `version` in `plugins/<plugin>/.claude-plugin/plugin.json` on every change, or
+   auto-update will not pick it up.
+3. Check locally:
 
    ```bash
    python3 scripts/validate_skills.py
    claude plugin validate . --strict
-   claude --plugin-dir plugins/orchestrated-dev     # sesión con el plugin cargado
+   claude --plugin-dir plugins/orchestrated-dev     # session with the plugin loaded
    ```
 
-En el frontmatter uso solo claves que también acepta claude.ai (`name`, `description`,
-`license`, `compatibility`, `metadata`, `allowed-tools`), por si algún día las subo allí.
+Frontmatter uses only the keys claude.ai also accepts (`name`, `description`, `license`,
+`compatibility`, `metadata`, `allowed-tools`), so the skills can be uploaded there too.
+
+## License
+
+[MIT](LICENSE)
