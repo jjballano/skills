@@ -7,20 +7,20 @@ actualiza solo. De momento hay un plugin:
 
 | Plugin                         | Skills                                                                                                                          |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| [`workflow`](plugins/workflow) | `task-workflow` (la operativa al recibir una tarea), `pr-shepherd` (vigilar la PR hasta que se pueda mergear), `status-report` (el «minuto y resultado») |
+| [`orchestrated-dev`](plugins/orchestrated-dev) | `task-workflow` (la operativa al recibir una tarea), `pr-shepherd` (vigilar la PR hasta que se pueda mergear), `status-report` (el «minuto y resultado») |
 
 ## Instalar
 
 ```
 /plugin marketplace add jjballano/skills
-/plugin install workflow@jjballano-skills
+/plugin install orchestrated-dev@jjballano-skills
 ```
 
 Mientras el repo sea privado hace falta acceso de lectura (`gh auth login` y `gh auth setup-git`).
 Para que se actualice solo: `/plugin` → *Marketplaces* → `jjballano-skills` → *Enable auto-update*.
 
-Las skills se invocan solas por su descripción o a mano: `/workflow:task-workflow`,
-`/workflow:pr-shepherd`, `/workflow:status-report`.
+Las skills se invocan solas por su descripción o a mano: `/orchestrated-dev:task-workflow`,
+`/orchestrated-dev:pr-shepherd`, `/orchestrated-dev:status-report`.
 
 ## Qué hace cada una
 
@@ -47,7 +47,7 @@ Las skills se invocan solas por su descripción o a mano: `/workflow:task-workfl
    ```bash
    python3 scripts/validate_skills.py
    claude plugin validate . --strict
-   claude --plugin-dir plugins/workflow     # sesión con el plugin cargado
+   claude --plugin-dir plugins/orchestrated-dev     # sesión con el plugin cargado
    ```
 
 En el frontmatter uso solo claves que también acepta claude.ai (`name`, `description`,

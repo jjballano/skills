@@ -9,8 +9,8 @@
   },
   "plugins": [
     {
-      "name": "workflow",
-      "source": "./plugins/workflow",
+      "name": "orchestrated-dev",
+      "source": "./plugins/orchestrated-dev",
       "description": "Working method for tasks handed to Claude: orchestrate small subagents, verify only what changed, open the PR and shepherd it until it is mergeable, and report status piece by piece."
     }
   ]
